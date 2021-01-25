@@ -1,15 +1,54 @@
-const addButton = document.getElementById('addButton');
+const addTask = document.getElementById('addTask');
 const inputTask = document.getElementById('newTask');
-const list = document.getElementById('list');
 const ul = document.getElementById('list');
-const li = document.createElement('li');
+const listEl = document.getElementById('list').getElementsByTagName('label');
+const listCheckEl = document
+  .getElementById('list')
+  .getElementsByTagName('input');
+let inputCount = document.getElementById('list').getElementsByTagName('input')
+  .length;
 
-addButton.addEventListener('click', (e) => {
+addTask.addEventListener('click', (e) => {
+  const label = document.createElement('label');
+  const input = document.createElement('input');
+  const lineBreak = document.createElement('br');
+
   e.preventDefault();
-  li.appendChild(document.createTextNode(inputTask.value));
-  ul.appendChild(li);
+  input.setAttribute('type', 'checkbox');
+  input.setAttribute('name', inputCount + 1);
+  input.setAttribute('id', inputCount + 1);
+  input.setAttribute('value', inputTask.value);
+
+  input.appendChild(document.createTextNode(inputTask.value));
+  ul.appendChild(input);
+
+  label.setAttribute('for', inputCount + 1);
+  label.appendChild(document.createTextNode(inputTask.value));
+  ul.appendChild(label);
+  ul.appendChild(lineBreak);
 
   inputTask.value = '';
-  //   inputTask.className = 'show';
-  //   addButton.className = 'hidden';
+  inputCount++;
 });
+
+for (i = 0; i < listEl.length; i++) {
+  listEl[i].addEventListener('click', (e) => {
+    if (e.target.className != 'checked') {
+      e.target.className = 'checked';
+    } else {
+      e.target.className = '';
+    }
+  });
+}
+
+const listEl = document.getElementById('list').getElementsByTagName('label');
+
+for (i = 0; i < listEl.length; i++) {
+  listEl[i].addEventListener('click', (e) => {
+    if (e.target.className != 'checked') {
+      e.target.className = 'checked';
+    } else {
+      e.target.className = '';
+    }
+  });
+}
